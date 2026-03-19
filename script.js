@@ -8,6 +8,7 @@ const giftReveal = document.getElementById('giftReveal');
 const giftAmount = document.getElementById('giftAmount');
 const tryAgainBtn = document.getElementById('tryAgainBtn');
 const whatsappShareBtn = document.getElementById('whatsappShareBtn');
+const scrollIndicator = document.getElementById('scrollIndicator');
 const confettiContainer = document.getElementById('confetti');
 const particlesContainer = document.getElementById('particles');
 const heroSection = document.querySelector('.hero');
@@ -160,6 +161,14 @@ function revealGift() {
 
     // Add celebration effects
     addCelebrationEffects();
+
+    // Show scroll indicator slightly after reveal so they know they can scroll
+    setTimeout(() => {
+        // Only show if the window is scrolled near the top
+        if (window.scrollY < 50) {
+            scrollIndicator.classList.remove('hidden');
+        }
+    }, 1500);
 }
 
 // Add Celebration Effects
@@ -236,6 +245,7 @@ function resetGift() {
     tryCount++;
     // Add exit animation
     giftReveal.style.animation = 'revealOut 0.5s ease-in forwards';
+    scrollIndicator.classList.add('hidden');
 
     // Add exit animation keyframes
     if (!document.querySelector('#reveal-out-keyframes')) {
@@ -454,6 +464,21 @@ function createRipple(event) {
 eidiyaBtn.addEventListener('click', createRipple);
 tryAgainBtn.addEventListener('click', createRipple);
 whatsappShareBtn.addEventListener('click', createRipple);
+
+// Handle Scroll Indicator
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 30 && !scrollIndicator.classList.contains('hidden')) {
+        scrollIndicator.classList.add('hidden');
+    }
+});
+
+scrollIndicator.addEventListener('click', () => {
+    scrollIndicator.classList.add('hidden');
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+    });
+});
 
 // Console Easter Egg
 console.log(`
