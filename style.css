@@ -616,7 +616,7 @@ body {
 /* Scroll Indicator */
 .scroll-indicator {
     position: fixed;
-    bottom: 40px;
+    bottom: 110px; /* Shifted higher up! */
     left: 50%;
     transform: translateX(-50%);
     font-size: 3rem;
